@@ -21,8 +21,11 @@ create table peliculas(
     diasRenta int,
     costoRenta float,
     costoDaño float,
-    clasificacion varchar
+    clasificacion varchar,
+    categoria varchar
 );
+
+--Alter table peliculas add column categoria varchar;
 
 create table tiendas(
     cod_tienda serial PRIMARY KEY,
