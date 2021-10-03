@@ -3,7 +3,14 @@
 “Sugar Wonka”
 */
 
-
+select 
+    count(renta.pelicula) as Cantidad_sugarWonka
+from 
+    renta,
+    peliculas
+WHERE
+    renta.pelicula = peliculas.cod_pelicula and 
+    lower(peliculas.titulo) = 'sugar wonka'
 /*
  2) Mostrar el nombre, apellido y pago total de todos los clientes que han
  rentado películas por lo menos 40 veces
@@ -66,7 +73,7 @@ order by
 ;
 
 /*
-    5. Mostrar el país y el nombre del cliente que más películas rentó así como
+    5 Mostrar el país y el nombre del cliente que más películas rentó así como
     también el porcentaje que representa la cantidad de películas que rentó
     conrespecto al resto de clientes del país.
 */

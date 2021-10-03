@@ -46,5 +46,6 @@ create table TEMPORAL(
 copy TEMPORAL FROM '/home/teitan67/MIA_P1/BlockbusterData.csv' DELIMITER ';' CSV
 copy TEMPORAL FROM '/home/teitan67/MIA_P1/BlockbusterData.csv' DELIMITER ';' CSV HEADER ENCODING 'WIN1252';
 
-select * from TEMPORAL limit 10;
+select * from temporal limit 10;
 
+delete from temporal ;

@@ -1,9 +1,8 @@
 drop table categorias;
 drop table idiomas;
-drop table clientes;
-drop table inventario;
-
 drop table renta;
+drop table clientes;
+drop table actores;
 ALTER TABLE tiendas DROP COLUMN jefeTienda;
 drop table empleados;
 drop table tiendas;
@@ -52,21 +51,8 @@ create table empleados(
 
 Alter table tiendas add foreign key (jefeTienda) references empleados(cod_empleado);
 
-create table renta (
-    cliente int,
-    pelicula int,
-    empleado int,
-    tienda int,
-    fechaRenta timestamp,
-    fechaRetorno timestamp,
-    montoPago float,
-    fechaPago timestamp,
-    foreign key (cliente) references clientes(cod_cliente),
-    foreign key (pelicula) references peliculas(cod_pelicula) ,
-    foreign key (empleado) references empleados(cod_empleado) ,
-    foreign key (tienda) references tiendas(cod_tienda) 
-);
 
+/*
 create table pelicula_tienda (
     renta int,
     pelicula int,
@@ -80,7 +66,7 @@ create table inventario(
     cantidad int,
     foreign key (tienda) references tiendas(cod_tienda),
     foreign key (pelicula) references peliculas(cod_pelicula)
-);
+);*/
 
 create table clientes(
     cod_cliente serial primary key,
@@ -116,33 +102,17 @@ create table actores(
     nombre varchar,
     foreign key (pelicula) references peliculas (cod_pelicula)
 );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-select * from pelicula_actor;
-
+create table renta (
+    cliente int,
+    pelicula int,
+    empleado int,
+    tienda int,
+    fechaRenta timestamp,
+    fechaRetorno timestamp,
+    montoPago float,
+    fechaPago timestamp,
+    foreign key (cliente) references clientes(cod_cliente),
+    foreign key (pelicula) references peliculas(cod_pelicula) ,
+    foreign key (empleado) references empleados(cod_empleado) ,
+    foreign key (tienda) references tiendas(cod_tienda) 
+);

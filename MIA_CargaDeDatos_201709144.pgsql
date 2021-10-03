@@ -10,7 +10,8 @@ insert into
         diasrenta,
         costorenta,
         costodaño,
-        clasificacion) 
+        clasificacion,
+        categoria) 
     select distinct 
         NOMBRE_PELICULA,
         descripcion_pelicula,
@@ -19,7 +20,8 @@ insert into
         CAST(DIAS_RENTA AS int),
         CAST(COSTO_RENTA AS float),
         CAST(COSTO_POR_DANO  AS float),
-        CLASIFICACION 
+        CLASIFICACION ,
+        CATEGORIA_PELICUL
     FROM temporal 
     where LANZAMIENTO <> '-';
 --tiendas
@@ -41,6 +43,7 @@ select
 FROM temporal 
 WHERE nombre_tienda <> '-'
 group by nombre_tienda, codigo_postal_tienda,DIRECCION_TIENDA,ciudad_tienda,pais_tienda
+;
 --Empleados
 
 insert into 
@@ -72,6 +75,7 @@ select
     temporal.usuario_empleado,
     temporal.password_empleado,
     tiendas.cod_tienda 
+;
 --clientes
 
 insert into 
@@ -108,15 +112,17 @@ SELECT
     temporal.ciudad_cliente,
     temporal.pais_cliente,
     tiendas.cod_tienda   
-
+;
 
 --Relacion empleado y tiendas
-ALTER TABLE tiendas ALTER COLUMN jefetienda  ; 
+
 
   update tiendas
-  set empleados.cod_empleado=tiendas.jefetienda
+  set jefetienda=empleados.cod_empleado
   FROM empleados
-  WHERE tiendas.cod_tienda = empleados.tienda
+  WHERE tiendas.cod_tienda = empleados.tienda;
+
+
 --Idiomas
 
 insert into 
@@ -132,7 +138,7 @@ select
     WHERE temporal.NOMBRE_PELICULA = peliculas.titulo
     GROUP by
     temporal.LENGUAJE_PELICULA,
-    peliculas.cod_pelicula
+    peliculas.cod_pelicula;
 
 --Categorias
 insert into 
@@ -150,7 +156,7 @@ select
     temporal.CATEGORIA_PELICUL,
     peliculas.cod_pelicula
 
-  
+;
 --ACTOR
 insert into 
     actores(
@@ -166,7 +172,7 @@ select
     GROUP by
     temporal.ACTOR_PELICULA,
     peliculas.cod_pelicula
-
+;
  --Rentas 
 insert into 
     renta(
@@ -205,13 +211,5 @@ SELECT
     temporal.fecha_retorno,
     temporal.monto_a_pagar,
     temporal.fecha_pago
+;
 
-
---Pruebas y axuliares
-update t set j='2' where c='tg'
-select distinct nombre_tienda,DIRECCION_TIENDA from temporal where DIRECCION_TIENDA <> '-' and nombre_tienda <> '-' limit 10;
-select * from RENTA ;
-select * from renta ;
-select * from peliculas ORDER BY TITULO;
-
-select nombre_pelicula,nombre
